@@ -9,11 +9,11 @@ As a very basic example of the ASP.NET Core functionalities we'll create a plain
 ## Agenda 11/10/2017
 
 1. **Creating the solution**
+2. **Incorporating SQL Database with Entity Framework**
 2. **Implementing authentication**
-3. **Implementing two endpoints** one only for logged users and the other
+3. **Implementing two endpoints** - one only for logged in users and the other for not authenticated users
 
 ## Agenda 18/10/2017
 
-1. **Incorporating SQL Database with Entity Framework
-2. **Using Database in ASP.NET Core API to present data to the end user**
-3. **Using Database in ASP.NET Core API to insert and update new data**
+1. **Using Database in ASP.NET Core API to present data to the end user**
+2. **Using Database in ASP.NET Core API to insert and update new data**
