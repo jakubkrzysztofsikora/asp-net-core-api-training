@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LunchService;
+using LunchService.Dtos;
 using LunchService.Models;
 
 namespace LunchService.Controllers
@@ -80,6 +81,32 @@ namespace LunchService.Controllers
             }
 
             return NoContent();
+        }
+
+        [HttpPost]
+        [Route("with-dishes")]
+        public async Task<IActionResult> AddMealWithDishes([FromBody] MealWithDishesDto mealWithDishes)
+        {
+            var newMeal = new Meal
+            {
+                Name = mealWithDishes.Name,
+            };
+
+            _context.Meals.Add(newMeal);
+            _context.Dishes.AddRange(mealWithDishes.Dishes);
+
+            foreach (var dish in mealWithDishes.Dishes)
+            {
+                _context.DishToMeal.Add(new DishToMeal
+                {
+                    Meal = newMeal,
+                    Dish = dish
+                });
+            }
+
+            await _context.SaveChangesAsync();
+
+            return Ok();
         }
 
         // POST: api/Meals

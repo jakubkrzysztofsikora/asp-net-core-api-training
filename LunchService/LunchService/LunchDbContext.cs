@@ -6,6 +6,8 @@ namespace LunchService
     public class LunchDbContext : DbContext
     {
         public DbSet<Meal> Meals { get; set; }
+        public DbSet<Dish> Dishes { get; set; }
+        public DbSet<DishToMeal> DishToMeal { get; set; }
 
         public LunchDbContext(DbContextOptions options) : base(options)
         {
@@ -20,11 +22,7 @@ namespace LunchService
                 .HasKey(dish => dish.Id);
 
             modelBuilder.Entity<DishToMeal>()
-                .HasKey(dishToMeal => new
-                {
-                    dishToMeal.DishId,
-                    dishToMeal.MealId
-                });
+                .HasKey(dishToMeal => dishToMeal.DishToMealId);
 
             modelBuilder.Entity<DishToMeal>()
                 .HasOne(dishToMeal => dishToMeal.Dish)
@@ -36,7 +34,5 @@ namespace LunchService
                 .WithMany(meal => meal.DishToMeals)
                 .HasForeignKey(dishToMeal => dishToMeal.MealId);
         }
-
-        public DbSet<LunchService.Models.Dish> Dish { get; set; }
     }
 }

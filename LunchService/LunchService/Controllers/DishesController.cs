@@ -25,7 +25,7 @@ namespace LunchService.Controllers
         [HttpGet]
         public IEnumerable<Dish> GetDish()
         {
-            return _context.Dish;
+            return _context.Dishes;
         }
 
         // GET: api/Dishes/5
@@ -37,7 +37,7 @@ namespace LunchService.Controllers
                 return BadRequest(ModelState);
             }
 
-            var dish = await _context.Dish.SingleOrDefaultAsync(m => m.Id == id);
+            var dish = await _context.Dishes.SingleOrDefaultAsync(m => m.Id == id);
 
             if (dish == null)
             {
@@ -91,7 +91,7 @@ namespace LunchService.Controllers
                 return BadRequest(ModelState);
             }
 
-            _context.Dish.Add(dish);
+            _context.Dishes.Add(dish);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetDish", new { id = dish.Id }, dish);
@@ -106,13 +106,13 @@ namespace LunchService.Controllers
                 return BadRequest(ModelState);
             }
 
-            var dish = await _context.Dish.SingleOrDefaultAsync(m => m.Id == id);
+            var dish = await _context.Dishes.SingleOrDefaultAsync(m => m.Id == id);
             if (dish == null)
             {
                 return NotFound();
             }
 
-            _context.Dish.Remove(dish);
+            _context.Dishes.Remove(dish);
             await _context.SaveChangesAsync();
 
             return Ok(dish);
@@ -120,7 +120,7 @@ namespace LunchService.Controllers
 
         private bool DishExists(Guid id)
         {
-            return _context.Dish.Any(e => e.Id == id);
+            return _context.Dishes.Any(e => e.Id == id);
         }
     }
 }
