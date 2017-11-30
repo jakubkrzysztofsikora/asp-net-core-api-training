@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LunchService.Models
 {
@@ -8,6 +9,6 @@ namespace LunchService.Models
         public Guid Id { get; set; }
         public string Name { get; set; }
 
-        public ICollection<DishToMeal> DishToMeals { get; set; }
+        public virtual ICollection<DishToMeal> DishToMeals { get; set; }
     }
 }

@@ -118,6 +118,14 @@ namespace LunchService.Controllers
             return Ok(dish);
         }
 
+        [HttpGet]
+        [Route("MealsByDishName/{dishName}")]
+        public IActionResult GetMealsByDishName([FromQuery] string dishName)
+        {
+            var meals = _context.Meals.Where(m => m.DishToMeals.Any(ds => ds.Dish.Name.Equals(dishName)));
+            return new OkObjectResult(meals);
+        }
+
         private bool DishExists(Guid id)
         {
             return _context.Dishes.Any(e => e.Id == id);
